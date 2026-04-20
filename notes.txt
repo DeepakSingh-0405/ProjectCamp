@@ -1,0 +1,35 @@
+npm init- initializes a node project
+node "index.js" runs the project
+we can change the scripts in package.json to dev or start to run the project with npm
+
+PRETTIER- syncs all the code files in the same format for all the team members before pushing
+.prettirrc - prettier have default settings but we can give our custom settings in this file in json format.
+.prettierignore - files written in this will be ignored by prettier to apply the changes in format.
+
+.env file used to store environment variables in key value pair format. It is used to store sensitive data like database credentials, API keys etc. We can access these variables in our code using process.env.VARIABLE_NAME. We should not push this file to git as it contains sensitive data, we can add it to .gitignore file.
+for adding it we use dotenv package. 
+for accessing the variables first we need to configure the path of the .env file using dotenv.config() method and then we can access the variables using process.env.VARIABLE_NAME.
+
+"
+import dotenv from "dotenv"
+
+dotenv.config({
+    path: "./.env"
+})
+
+let myusername = process.env.name     
+"
+
+CORS- Cross Origin Resource Sharing is a security feature implemented by browsers to restrict web pages from making requests to a different domain than the one that served the web page. It is used to allow or restrict resources on a web server to be requested from another domain outside the domain from which the resource originated. We can configure CORS in our express app using cors package. We can specify the allowed origins, methods, headers etc in the configuration.
+It has to be configured in the bakend itself to allow the frontend to make requests to the backend. If we do not configure CORS, the frontend will not be able to access the backend resources and will throw a CORS error in the browser console.
+To do so we need to install cors package and then use it as a middleware in our express app. We can specify the allowed origins, methods, headers etc in the configuration. We can also specify the allowed origins in the .env file and access it in the code using process.env.CORS_ORIGIN.
+example of CORS configuration in express app:
+***
+import cors from 'cors'
+app.use(cors({
+  origin: process.env.CORS_ORIGIN?.split(',')  || 'http://localhost:5173',
+  credentials: true,
+  methods: ['GET','POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+  allowedHeaders: [ 'Content-Type', 'Authorization']
+}))
+***
