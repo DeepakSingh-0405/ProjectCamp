@@ -60,7 +60,6 @@ const userSchema = new Schema({
     }
 },{timestamps:true});
 
-
 //this is a pre hook that will run before saving the user document. it will run only if the password field is modified and hash it, not on any other field update.
 //there is also a post hook that will run after saving the user document. it can also be performed in the same manner. 
 userSchema.pre("save", async function(next){
@@ -109,3 +108,4 @@ userSchema.methods.generateToken = function(){
 }
 
 export const User = mongoose.model("User", userSchema)
+
