@@ -47,10 +47,46 @@ const userResetPasswordValidator = ()=>{
   ]
 }
 
+const projectCreateValidator = ()=>{
+  return [
+    body("title").trim().notEmpty().withMessage("title required"),
+    body("description").trim().notEmpty().withMessage("description is required")
+  ]
+}
+
+const addMemberToProjectValidator = ()=>{
+  return [
+    body("email")
+      .trim()
+      .notEmpty()
+      .withMessage("Email is required")
+      .isEmail()
+      .withMessage("email is incorrect"),
+    
+    body("role")
+      .trim()
+      .notEmpty()
+      .withMessage("role is required")
+      .toUpperCase()
+  ]
+}
+
+const updateMemberRoleValidator = ()=>{
+  return [
+    body("newRole")
+      .trim()
+      .notEmpty()
+      .withMessage("role is required")
+      .toUpperCase()
+  ]
+}
 export {
     userRegisterValidator,
     userLoginValidator,
     userChangePasswordValidator,
     userForgotPasswordValidator,
-    userResetPasswordValidator
+    userResetPasswordValidator,
+    projectCreateValidator,
+    addMemberToProjectValidator,
+    updateMemberRoleValidator
 };

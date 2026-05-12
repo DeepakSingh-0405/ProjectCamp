@@ -26,7 +26,7 @@ const taskSchema = new Schema({
         ref:"User",
         required:true
     },
-    role:{
+    status:{
         type: String,
         enum:AvailableTaskStatus,
         default:TaskStatusEnum.TODO
